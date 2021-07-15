@@ -1,11 +1,12 @@
 const Card = require ('../models/card')
 
 const getAllCards = function (req){
-    return Card.find()
+    return Card.find({username: req.user.username})
 }
 
 const addCard = function(req){
     let date = Date.now()
+    req.body.username = req.user.username
     req.body.created_at = date
     req.body.modified_at = date
     return Card(req.body)
